@@ -1,8 +1,11 @@
-// On importe les décorateurs Controller, Get et Post de NestJS.
-// - Controller : permet de créer un contrôleur.
-// - Get : permet de créer une route HTTP GET.
-// - Post : permet de créer une route HTTP POST.
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UseGuards,
+  Req,
+} from '@nestjs/common';
 
 // On importe le service AuthService.
 // C'est lui qui contiendra toute la logique métier (inscription, connexion...).
@@ -10,7 +13,6 @@ import { AuthService } from './auth.service';
 
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
-import { UseGuards } from '@nestjs/common';
 import { JwtGuard } from './jwt/jwt.guard';
 
 // Ce contrôleur répondra à toutes les routes qui commencent par /auth.
@@ -41,11 +43,9 @@ login(@Body() loginDto: LoginDto) {
   // Route GET /auth/me
   // Elle permettra plus tard de récupérer
   // les informations de l'utilisateur connecté.
-  @UseGuards(JwtGuard)
-  @Get('me')
-  me() {
-
-    // On appelle la méthode me() du service.
-    return this.authService.me();
-  }
+ @UseGuards(JwtGuard)
+@Get('me')
+me(@Req() request) {
+  return this.authService.me(request.user);
+}
 }

@@ -28,9 +28,11 @@ export class AuthService {
   };
 }
 
-  me() {
-    return {
-      message: 'Utilisateur courant',
-    };
-  }
+  me(user) {
+  console.log(user);
+
+  return {
+    message: 'Utilisateur courant',
+  };
+}
 }

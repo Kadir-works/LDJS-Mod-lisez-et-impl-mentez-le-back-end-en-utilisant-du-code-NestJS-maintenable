@@ -30,6 +30,7 @@ try {
   const payload = this.jwtService.verify(token);
 
   console.log(payload);
+  request.user = payload;
 
   return true;
 } catch {
