@@ -1,5 +1,5 @@
 {
-  "uuid": "9ce3c22b-2d1a-4a55-a7c0-56d4a7fd3b7a",
+  "uuid": "9f0e1e65-6326-46aa-a26a-c7f96c5434b0",
   "lastMigration": 33,
   "name": "ChâTop API",
   "endpointPrefix": "api",
@@ -9,14 +9,14 @@
   "folders": [],
   "routes": [
     {
-      "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "uuid": "7b891ed9-4825-425e-87b9-c8f23f3cb4c6",
       "type": "http",
       "documentation": "Register a new user",
       "method": "post",
       "endpoint": "auth/register",
       "responses": [
         {
-          "uuid": "44f44d11-63ae-4231-ba77-83f53d1a9d03",
+          "uuid": "6a593df1-6215-46b4-8464-5e5214086d33",
           "body": "{\"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImlhdCI6MTY0MDAwMDAwMH0.dummytoken\"}",
           "latency": 0,
           "statusCode": 200,
@@ -40,7 +40,7 @@
           "crudKey": "id"
         },
         {
-          "uuid": "ac8b7810-fe46-4bdc-a2c2-1878c57ad177",
+          "uuid": "88ab5953-51b9-451e-9de9-e331527f96cd",
           "body": "{\"message\": \"Email already exists\"}",
           "latency": 0,
           "statusCode": 400,
@@ -69,14 +69,14 @@
       "streamingInterval": 0
     },
     {
-      "uuid": "a2b3c4d5-e6f7-8901-bcde-f12345678901",
+      "uuid": "4920349c-5881-4a01-9596-cacf7aa9d224",
       "type": "http",
       "documentation": "Login user",
       "method": "post",
       "endpoint": "auth/login",
       "responses": [
         {
-          "uuid": "51783113-a2f5-4241-bfca-dadce544a71e",
+          "uuid": "120df675-d597-4946-958d-39dd3e52220c",
           "body": "{\"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImlhdCI6MTY0MDAwMDAwMH0.dummytoken\"}",
           "latency": 0,
           "statusCode": 200,
@@ -100,7 +100,7 @@
           "crudKey": "id"
         },
         {
-          "uuid": "4a4626ef-070d-40db-95f9-0b442b32f714",
+          "uuid": "01256b71-32ec-435d-ad47-4f6830fce105",
           "body": "{\"message\": \"Invalid credentials\"}",
           "latency": 0,
           "statusCode": 401,
@@ -129,14 +129,14 @@
       "responseMode": null
     },
     {
-      "uuid": "a3b4c5d6-e7f8-9012-cdef-123456789012",
+      "uuid": "3e71cd27-f4ae-43e2-a61d-bf943ff57a3f",
       "type": "http",
       "documentation": "Get current user",
       "method": "get",
       "endpoint": "auth/me",
       "responses": [
         {
-          "uuid": "0d6eefa7-6dc9-43ce-aab5-526f5c1a6fb3",
+          "uuid": "3ec100a6-8343-499f-ba68-5564adcc13ce",
           "body": "{\"id\": 1, \"name\": \"Test User\", \"email\": \"test@test.com\", \"created_at\": \"2024-01-01T00:00:00Z\", \"updated_at\": \"2024-01-01T00:00:00Z\"}",
           "latency": 0,
           "statusCode": 200,
@@ -160,7 +160,7 @@
           "crudKey": "id"
         },
         {
-          "uuid": "4a21a542-78ac-4e62-9842-0463731f3fcc",
+          "uuid": "91eb56eb-29b0-48d9-8083-decd776d45a7",
           "body": "{\"message\": \"Unauthorized\"}",
           "latency": 0,
           "statusCode": 401,
@@ -189,14 +189,14 @@
       "responseMode": null
     },
     {
-      "uuid": "a4b5c6d7-e8f9-0123-def0-234567890123",
+      "uuid": "c1d8491d-d2fe-4ac8-b574-645feb5d8407",
       "type": "http",
       "documentation": "Get all rentals",
       "method": "get",
       "endpoint": "rentals",
       "responses": [
         {
-          "uuid": "210d693d-0b8e-4a34-a581-7cf1340b30b6",
+          "uuid": "c3aaea56-78b3-4eaa-9da0-74af24fa8485",
           "body": "{\"rentals\": [{\"id\": 1, \"name\": \"Appartement Paris\", \"surface\": 50, \"price\": 1200, \"picture\": \"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688\", \"description\": \"Bel appartement au coeur de Paris\", \"owner\": {\"id\": 1, \"name\": \"Patrick\"}, \"created_at\": \"2024-01-01T00:00:00Z\", \"updated_at\": \"2024-01-01T00:00:00Z\"}]}",
           "latency": 0,
           "statusCode": 200,
@@ -220,7 +220,7 @@
           "crudKey": "id"
         },
         {
-          "uuid": "90740893-33cb-495b-be0c-b96cbfbd61e8",
+          "uuid": "44afdde3-f9c0-4a89-b4a2-ce73f0d33f4a",
           "body": "{\"message\": \"Unauthorized\"}",
           "latency": 0,
           "statusCode": 401,
@@ -249,14 +249,14 @@
       "responseMode": null
     },
     {
-      "uuid": "a5b6c7d8-e9f0-1234-ef01-345678901234",
+      "uuid": "25396cf0-2474-44b6-95c3-172bd52a8dcc",
       "type": "http",
       "documentation": "Get rental by ID",
       "method": "get",
       "endpoint": "rentals/:id",
       "responses": [
         {
-          "uuid": "47f30ec0-56ad-4bf3-adea-775654bee9e6",
+          "uuid": "bff4458c-5953-4b36-8750-c51e1815b37c",
           "body": "{\"id\": 1, \"name\": \"Appartement Paris\", \"surface\": 50, \"price\": 1200, \"picture\": \"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688\", \"description\": \"Bel appartement au coeur de Paris avec vue sur la Tour Eiffel\", \"owner\": {\"id\": 1, \"name\": \"Patrick\"}, \"created_at\": \"2024-01-01T00:00:00Z\", \"updated_at\": \"2024-01-01T00:00:00Z\"}",
           "latency": 0,
           "statusCode": 200,
@@ -280,7 +280,7 @@
           "crudKey": "id"
         },
         {
-          "uuid": "ad671a00-7c6d-438f-b97e-9a060777a39f",
+          "uuid": "4ab94775-9e4a-44d7-b26d-0ce36b27f38d",
           "body": "{\"message\": \"Rental not found\"}",
           "latency": 0,
           "statusCode": 404,
@@ -309,14 +309,14 @@
       "responseMode": null
     },
     {
-      "uuid": "a6b7c8d9-e0f1-2345-f012-456789012345",
+      "uuid": "2e176699-1d20-4d4f-9895-0098fd04e667",
       "type": "http",
       "documentation": "Create new rental",
       "method": "post",
       "endpoint": "rentals",
       "responses": [
         {
-          "uuid": "5b6cd9ec-dcd6-4739-8692-58bca277db9e",
+          "uuid": "23a734a8-3e77-46a5-988d-4bab16f5f124",
           "body": "{\"message\": \"Rental created!\"}",
           "latency": 0,
           "statusCode": 201,
@@ -340,7 +340,7 @@
           "crudKey": "id"
         },
         {
-          "uuid": "781b6dd4-bbaa-45da-bc1f-96803960c109",
+          "uuid": "af56006b-6e01-4f33-89ef-87ba24ef6094",
           "body": "{\"message\": \"Validation error\"}",
           "latency": 0,
           "statusCode": 400,
@@ -369,14 +369,14 @@
       "responseMode": null
     },
     {
-      "uuid": "a7b8c9d0-e1f2-3456-0123-567890123456",
+      "uuid": "8f1ef2b8-f717-4b4a-a571-6bf8b394bb47",
       "type": "http",
       "documentation": "Update rental",
       "method": "put",
       "endpoint": "rentals/:id",
       "responses": [
         {
-          "uuid": "35fe6d23-da45-4c86-ab97-24260ee05730",
+          "uuid": "343d7a89-e377-423f-a1a7-947b68821720",
           "body": "{\"message\": \"Rental updated!\"}",
           "latency": 0,
           "statusCode": 200,
@@ -400,7 +400,7 @@
           "crudKey": "id"
         },
         {
-          "uuid": "d35d646c-f56d-4471-9c72-611eae27e78c",
+          "uuid": "7208d847-2ff3-4381-bf1c-ffac24e3a255",
           "body": "{\"message\": \"Rental not found\"}",
           "latency": 0,
           "statusCode": 404,
@@ -429,14 +429,14 @@
       "responseMode": null
     },
     {
-      "uuid": "a8b9c0d1-e2f3-4567-1234-678901234567",
+      "uuid": "eb704a42-2ef0-4e3e-8425-28acb5233fc7",
       "type": "http",
       "documentation": "Get user by ID",
       "method": "get",
       "endpoint": "user/:id",
       "responses": [
         {
-          "uuid": "ccb5d593-442c-46bc-b513-dc445f50b6da",
+          "uuid": "437ef7c5-7949-45e7-964c-40c3644bbf0e",
           "body": "{\"id\": 1, \"name\": \"John Doe\", \"email\": \"john@example.com\", \"created_at\": \"2024-01-01T00:00:00Z\", \"updated_at\": \"2024-01-01T00:00:00Z\"}",
           "latency": 0,
           "statusCode": 200,
@@ -460,7 +460,7 @@
           "crudKey": "id"
         },
         {
-          "uuid": "e10b9ec6-0010-4457-bc78-164a6988e48c",
+          "uuid": "565699af-78d3-41df-afd3-18032aedcc22",
           "body": "{\"message\": \"User not found\"}",
           "latency": 0,
           "statusCode": 404,
@@ -489,14 +489,14 @@
       "responseMode": null
     },
     {
-      "uuid": "a9b0c1d2-e3f4-5678-2345-789012345678",
+      "uuid": "27a51a1f-d27c-40a4-b32a-0c9388c449b7",
       "type": "http",
       "documentation": "Send message",
       "method": "post",
       "endpoint": "messages",
       "responses": [
         {
-          "uuid": "15582e17-2400-42c8-9cae-4e7c304d0177",
+          "uuid": "b4688203-9aaa-4581-afa3-25bd475be85a",
           "body": "{\"message\": \"Message sent!\"}",
           "latency": 0,
           "statusCode": 200,
@@ -520,7 +520,7 @@
           "crudKey": "id"
         },
         {
-          "uuid": "77396087-f1c9-434a-8c96-185c36775231",
+          "uuid": "444b4c0f-b8ef-424d-a809-73a92a0ee807",
           "body": "{\"message\": \"Validation error\"}",
           "latency": 0,
           "statusCode": 400,
@@ -552,39 +552,39 @@
   "rootChildren": [
     {
       "type": "route",
-      "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      "uuid": "7b891ed9-4825-425e-87b9-c8f23f3cb4c6"
     },
     {
       "type": "route",
-      "uuid": "a2b3c4d5-e6f7-8901-bcde-f12345678901"
+      "uuid": "4920349c-5881-4a01-9596-cacf7aa9d224"
     },
     {
       "type": "route",
-      "uuid": "a3b4c5d6-e7f8-9012-cdef-123456789012"
+      "uuid": "3e71cd27-f4ae-43e2-a61d-bf943ff57a3f"
     },
     {
       "type": "route",
-      "uuid": "a4b5c6d7-e8f9-0123-def0-234567890123"
+      "uuid": "c1d8491d-d2fe-4ac8-b574-645feb5d8407"
     },
     {
       "type": "route",
-      "uuid": "a5b6c7d8-e9f0-1234-ef01-345678901234"
+      "uuid": "25396cf0-2474-44b6-95c3-172bd52a8dcc"
     },
     {
       "type": "route",
-      "uuid": "a6b7c8d9-e0f1-2345-f012-456789012345"
+      "uuid": "2e176699-1d20-4d4f-9895-0098fd04e667"
     },
     {
       "type": "route",
-      "uuid": "a7b8c9d0-e1f2-3456-0123-567890123456"
+      "uuid": "8f1ef2b8-f717-4b4a-a571-6bf8b394bb47"
     },
     {
       "type": "route",
-      "uuid": "a8b9c0d1-e2f3-4567-1234-678901234567"
+      "uuid": "eb704a42-2ef0-4e3e-8425-28acb5233fc7"
     },
     {
       "type": "route",
-      "uuid": "a9b0c1d2-e3f4-5678-2345-789012345678"
+      "uuid": "27a51a1f-d27c-40a4-b32a-0c9388c449b7"
     }
   ],
   "proxyMode": false,
