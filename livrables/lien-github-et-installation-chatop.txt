@@ -1,0 +1,93 @@
+LIVRABLE - LIEN GITHUB ET PROCEDURE D'INSTALLATION
+====================================================
+
+1. LIEN VERS LE REPOSITORY GITHUB
+
+Repository GitHub :
+https://github.com/Kadir-works/LDJS-Mod-lisez-et-impl-mentez-le-back-end-en-utilisant-du-code-NestJS-maintenable
+
+Branche de livraison :
+release/v1.0.0
+
+Le repository contient :
+- le code back-end NestJS et TypeScript ;
+- le schema Prisma ;
+- le script SQL de creation de la base de donnees ;
+- la documentation du projet ;
+- les fichiers necessaires au lancement de l'API.
+
+2. PREREQUIS
+
+- Node.js et npm ;
+- MySQL 8.0 ou une version compatible ;
+- Git ;
+- un navigateur web ou Postman pour tester l'API.
+
+3. INSTALLATION DU PROJET
+
+Cloner le repository :
+
+git clone https://github.com/Kadir-works/LDJS-Mod-lisez-et-impl-mentez-le-back-end-en-utilisant-du-code-NestJS-maintenable.git
+cd LDJS-Mod-lisez-et-impl-mentez-le-back-end-en-utilisant-du-code-NestJS-maintenable/backend
+
+Installer les dependances du back-end :
+
+npm install
+
+4. INSTALLATION DE LA BASE DE DONNEES
+
+1. Demarrer le serveur MySQL.
+2. Ouvrir le fichier :
+   livrables/script-creation-base-de-donnees-chatop.txt
+3. Executer son contenu dans MySQL Workbench ou dans un client MySQL.
+4. Verifier que la base chatop_db et les tables users, rentals et messages
+   ont ete creees.
+
+Creer ensuite le fichier backend/.env avec les variables locales suivantes :
+
+DATABASE_URL="mysql://UTILISATEUR:MOT_DE_PASSE@localhost:3306/chatop_db"
+JWT_SECRET="une-cle-secrete-locale"
+PORT=3001
+API_URL="http://localhost:3001"
+
+Les valeurs UTILISATEUR et MOT_DE_PASSE doivent correspondre a la
+configuration MySQL de la machine utilisee.
+
+5. GENERATION DE PRISMA ET LANCEMENT
+
+Depuis le dossier backend :
+
+npx prisma generate
+npm run start:dev
+
+L'API demarre normalement sur :
+http://localhost:3001
+
+Le prefixe de toutes les routes de l'API est :
+http://localhost:3001/api
+
+6. URL DE SWAGGER
+
+La documentation interactive Swagger est disponible a l'adresse :
+
+http://localhost:3001/docs
+
+Swagger permet de consulter les routes, les formats de requetes et les
+reponses de l'API. Le bouton Authorize permet de renseigner le token JWT
+sous la forme :
+
+Bearer <token>
+
+7. VERIFICATION
+
+Commandes de verification depuis le dossier backend :
+
+npm run build
+npm run test
+npm run test:e2e
+
+Les routes protegees necessitent un token obtenu avec :
+
+POST http://localhost:3001/api/auth/register
+ou
+POST http://localhost:3001/api/auth/login
