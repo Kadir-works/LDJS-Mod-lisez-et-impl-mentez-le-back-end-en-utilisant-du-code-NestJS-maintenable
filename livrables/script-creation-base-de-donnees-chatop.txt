@@ -1,0 +1,93 @@
+SCRIPT DE CREATION DE LA BASE DE DONNEES CHATOP
+================================================
+
+-- MySQL 8.0+
+-- Ce script cree la base et les tables utilisees par l'API ChaTop.
+
+CREATE DATABASE IF NOT EXISTS chatop_db
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE chatop_db;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS rentals (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    surface DECIMAL(10, 2) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    picture VARCHAR(500),
+    description TEXT NOT NULL,
+    owner_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_rentals_owner
+        FOREIGN KEY (owner_id) REFERENCES users(id)
+        ON DELETE CASCADE,
+    INDEX idx_owner (owner_id)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS messages (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    rental_id INT NOT NULL,
+    user_id INT NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_messages_rental
+        FOREIGN KEY (rental_id) REFERENCES rentals(id)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_messages_user
+        FOREIGN KEY (user_id) REFERENCES users(id)
+        ON DELETE CASCADE,
+    INDEX idx_rental (rental_id),
+    INDEX idx_user (user_id)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
+
+-- Verification des tables creees.
+SHOW TABLES;
+
+-- Verification facultative des donnees.
+-- SELECT * FROM users;
+-- SELECT * FROM rentals;
+-- SELECT * FROM messages;
+
+DESCRIPTION DES RELATIONS
+=========================
+
+users 1 ---- N rentals
+Un utilisateur peut etre proprietaire de plusieurs locations.
+La colonne rentals.owner_id reference users.id.
+
+users 1 ---- N messages
+Un utilisateur peut envoyer plusieurs messages.
+La colonne messages.user_id reference users.id.
+
+rentals 1 ---- N messages
+Une location peut recevoir plusieurs messages.
+La colonne messages.rental_id reference rentals.id.
+
+SECURITE
+========
+
+Le mot de passe ne doit jamais etre stocke en clair.
+L'application le hash avec bcrypt avant son enregistrement dans users.password.
+La valeur DATABASE_URL contenant les identifiants MySQL doit rester dans le
+fichier backend/.env et ne doit pas etre publiee dans GitHub.

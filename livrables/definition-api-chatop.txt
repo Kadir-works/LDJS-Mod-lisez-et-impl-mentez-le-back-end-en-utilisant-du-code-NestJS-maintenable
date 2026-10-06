@@ -1,0 +1,204 @@
+DEFINITION DE L'API CHATOP
+===========================
+
+1. PRESENTATION
+
+Nom : ChaTop - Portail de location saisonniere
+Technologie : API REST NestJS et TypeScript
+Base de donnees : MySQL avec Prisma
+Version de l'API : 1.0
+URL locale de base : http://localhost:3001/api
+Documentation interactive : http://localhost:3001/docs
+
+L'API permet de gerer les utilisateurs, l'authentification, les locations
+saisonnieres et l'envoi de messages entre utilisateurs.
+
+Les donnees sont envoyees au format JSON, sauf la creation et la modification
+d'une location qui utilisent multipart/form-data afin de transmettre une image.
+
+2. AUTHENTIFICATION
+
+L'inscription et la connexion renvoient un token JWT.
+Pour acceder a une route protegee, le client doit ajouter l'en-tete :
+
+Authorization: Bearer <token>
+
+Une absence de token ou un token invalide renvoie le code HTTP 401.
+
+3. ENDPOINTS D'AUTHENTIFICATION
+
+POST /api/auth/register
+Description : cree un compte utilisateur.
+Authentification : non.
+Body JSON :
+{
+  "name": "Jean Dupont",
+  "email": "jean@example.com",
+  "password": "MotDePasse123!"
+}
+Succes : 200 OK.
+Reponse :
+{
+  "token": "<jwt>"
+}
+Erreurs possibles : 400 donnees invalides, 409 adresse email deja utilisee.
+
+POST /api/auth/login
+Description : authentifie un utilisateur.
+Authentification : non.
+Body JSON :
+{
+  "email": "jean@example.com",
+  "password": "MotDePasse123!"
+}
+Succes : 200 OK.
+Reponse :
+{
+  "token": "<jwt>"
+}
+Erreur possible : 401 email ou mot de passe incorrect.
+
+GET /api/auth/me
+Description : renvoie les informations de l'utilisateur connecte.
+Authentification : oui, JWT obligatoire.
+Succes : 200 OK.
+Reponse :
+{
+  "id": 1,
+  "name": "Jean Dupont",
+  "email": "jean@example.com",
+  "created_at": "2026-01-01T10:00:00.000Z",
+  "updated_at": "2026-01-01T10:00:00.000Z"
+}
+
+4. ENDPOINTS DES LOCATIONS
+
+GET /api/rentals
+Description : renvoie la liste de toutes les locations.
+Authentification : oui, JWT obligatoire.
+Succes : 200 OK.
+Reponse :
+{
+  "rentals": [
+    {
+      "id": 1,
+      "name": "Appartement Paris",
+      "surface": 50,
+      "price": 1200,
+      "picture": "http://localhost:3001/uploads/image.jpg",
+      "description": "Bel appartement lumineux",
+      "owner_id": 1,
+      "created_at": "2026-01-01T10:00:00.000Z",
+      "updated_at": "2026-01-01T10:00:00.000Z",
+      "owner": {
+        "id": 1,
+        "name": "Jean Dupont",
+        "email": "jean@example.com"
+      }
+    }
+  ]
+}
+
+GET /api/rentals/:id
+Description : renvoie le detail d'une location.
+Authentification : oui, JWT obligatoire.
+Parametre : id, identifiant numerique de la location.
+Succes : 200 OK.
+Erreur possible : 404 location introuvable.
+
+POST /api/rentals
+Description : cree une location appartenant a l'utilisateur connecte.
+Authentification : oui, JWT obligatoire.
+Content-Type : multipart/form-data.
+Champs obligatoires :
+- name : texte, nom de la location
+- surface : nombre positif, surface en metres carres
+- price : nombre positif, prix de la location
+- description : texte, description de la location
+- picture : fichier image obligatoire, taille maximale 5 Mo
+Succes : 201 Created.
+Reponse :
+{
+  "message": "Rental created!"
+}
+Erreurs possibles : 400 donnees invalides ou fichier non image.
+
+PUT /api/rentals/:id
+Description : modifie une location appartenant a l'utilisateur connecte.
+Authentification : oui, JWT obligatoire.
+Content-Type : multipart/form-data.
+Parametre : id, identifiant numerique de la location.
+Champs facultatifs : name, surface, price, description, picture.
+Succes : 200 OK.
+Reponse :
+{
+  "message": "Rental updated!"
+}
+Erreurs possibles : 400 donnees invalides, 403 utilisateur non proprietaire,
+404 location introuvable.
+
+5. ENDPOINT UTILISATEUR
+
+GET /api/user/:id
+Description : renvoie le profil public d'un utilisateur.
+Authentification : oui, JWT obligatoire.
+Parametre : id, identifiant numerique de l'utilisateur.
+Succes : 200 OK.
+Reponse :
+{
+  "id": 1,
+  "name": "Jean Dupont",
+  "email": "jean@example.com",
+  "created_at": "2026-01-01T10:00:00.000Z",
+  "updated_at": "2026-01-01T10:00:00.000Z"
+}
+Erreur possible : 404 utilisateur introuvable.
+
+6. ENDPOINT DES MESSAGES
+
+POST /api/messages
+Description : envoie un message au sujet d'une location.
+Authentification : oui, JWT obligatoire.
+Body JSON :
+{
+  "rental_id": 1,
+  "message": "Bonjour, je souhaite avoir plus d informations."
+}
+Le user_id est determine par le token JWT. Il ne doit pas etre utilise pour
+choisir l'auteur du message.
+Succes : 200 OK.
+Reponse :
+{
+  "message": "Message sent!"
+}
+Erreurs possibles : 400 location introuvable ou donnees invalides.
+
+7. CODES HTTP PRINCIPAUX
+
+200 OK : requete traitee avec succes.
+201 Created : ressource creee avec succes.
+400 Bad Request : donnees invalides ou requete incorrecte.
+401 Unauthorized : authentification absente ou invalide.
+403 Forbidden : utilisateur non autorise a effectuer l'action.
+404 Not Found : ressource introuvable.
+409 Conflict : conflit, par exemple email deja utilise.
+
+8. MODELES DE DONNEES
+
+User : id, email, name, password, created_at, updated_at.
+Le mot de passe est stocke sous forme de hash et n'est jamais renvoye par l'API.
+
+Rental : id, name, surface, price, picture, description, owner_id,
+created_at, updated_at. Une location appartient a un utilisateur.
+
+Message : id, rental_id, user_id, message, created_at, updated_at.
+Un message est lie a une location et a un utilisateur.
+
+9. ARCHITECTURE
+
+Le flux principal est :
+Controller -> Service -> PrismaService -> Base de donnees MySQL.
+
+La validation des donnees est geree par les DTO et ValidationPipe.
+La protection des routes est geree par JwtAuthGuard.
+Swagger est disponible a l'adresse http://localhost:3001/docs.
